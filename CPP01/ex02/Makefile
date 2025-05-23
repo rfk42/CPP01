@@ -4,22 +4,25 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-PRGM_NAME =  HITHISISBRAIN
+NAME = HITHISISBRAIN
 
-SRC = *.cpp
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-all: $(PRGM_NAME)
+all: $(NAME)
 
-$(PRGM_NAME): $(OBJ)
-	$(CC) -o $(PRGM_NAME) $(SRC) $(CFLAGS) 
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(PRGM_NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

@@ -4,21 +4,27 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-PRGM_NAME =  Weapon
-SRC = *.cpp
+NAME = Weapon
+
+SRC = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+
+INCLUDE = HumanA.hpp HumanB.hpp Weapon.hpp
 
 OBJ = $(SRC:.cpp=.o)
 
-all: $(PRGM_NAME)
+all: $(NAME)
 
-$(PRGM_NAME): $(OBJ)
-	$(CC) -o $(PRGM_NAME) $(SRC) $(CFLAGS) 
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+%.o: %.cpp $(INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(PRGM_NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

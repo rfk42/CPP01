@@ -1,23 +1,30 @@
 CC = c++
+
 RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-PRGM_NAME = Harl
+NAME = Harl
 
-SRC = Harl.cpp main.cpp
+SRC = main.cpp Harl.cpp
+
+INCLUDE = Harl.hpp
+
 OBJ = $(SRC:.cpp=.o)
 
-all: $(PRGM_NAME)
+all: $(NAME)
 
-$(PRGM_NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(PRGM_NAME)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+%.o: %.cpp $(INCLUDE)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(PRGM_NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
